@@ -22,7 +22,7 @@ func (this *UserController) UserLogin()  {
 	params    := structs.UserLoginParams{}
 	this.RequestData(&params)
 	//匹配模型
-	user      := models.User{}
+	user      := models.User{UserName:params.UserName}
 	o   := orm.NewOrm()
 	err := o.Read(&user,"user_name")
 	//数据分析
@@ -45,7 +45,6 @@ func (this *UserController) UserLogin()  {
 		data["user_id"]   = user.Id
 		data["user_name"] = user.UserName
 		data["nick_name"] = user.NickName
-		this.SetSession("uid",user.Id)
 	}
 	//数据输出
 	this.ReturnData(code,message,data)
