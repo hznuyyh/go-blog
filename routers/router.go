@@ -1,10 +1,10 @@
 package routers
 
 import (
-	"go-blog/controllers"
 	"github.com/astaxie/beego"
+	"go-blog/controllers/auth"
 )
 
 func init() {
-    beego.Router("/", &controllers.MainController{})
+    beego.Router("/user/login",&auth.UserController{},"*:UserLogin" )
 }
