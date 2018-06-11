@@ -61,10 +61,15 @@ func (this *BaseController) ReturnData(code int, message string, data interface{
 		"message": message,
 		"data":    data,
 	}
+	this.Ctx.ResponseWriter.Header().Set("Access-Control-Allow-Origin", "http://localhost:8080")       //允许访问源
+	this.Ctx.ResponseWriter.Header().Set("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS")     //允许post访问
+	this.Ctx.ResponseWriter.Header().Set("Access-Control-Allow-Headers", "Content-Type,Authorization")  //header的类型
+	this.Ctx.ResponseWriter.Header().Set("Access-Control-Max-Age", "1728000")
+	this.Ctx.ResponseWriter.Header().Set("Access-Control-Allow-Credentials", "true")
+	this.Ctx.ResponseWriter.Header().Set("Content-type", "application/json") //返回数据格式是json	this.ServeJSON()
 	this.ServeJSON()
 	this.StopRun()
 }
-
 
 /**
  * 将struct转化成map
