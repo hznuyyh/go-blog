@@ -61,7 +61,7 @@ func (this *BaseController) ReturnData(code int, message string, data interface{
 		"message": message,
 		"data":    data,
 	}
-	this.ServeJSON()
+	this.ServeJSONP()
 	this.StopRun()
 }
 
