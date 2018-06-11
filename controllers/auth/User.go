@@ -7,6 +7,8 @@ import (
 	"encoding/hex"
 	"go-blog/controllers/structs"
 	"go-blog/models"
+	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/context"
 )
 
 type UserController struct {
@@ -46,6 +48,11 @@ func (this *UserController) UserLogin()  {
 		data["user_name"] = user.UserName
 		data["nick_name"] = user.NickName
 	}
+	var FilterNoCache = func(ctx *context.Context) {
+		ctx.Output.Header("Access-Control-Allow-Origin", "*")
+		ctx.Output.Header("Access-Control-Allow-Headers", "X-Requested-With,accept, origin, content-type")
+	}
+	beego.InsertFilter("*", beego.BeforeStatic, FilterNoCache)
 	//数据输出
 	this.ReturnData(code,message,data)
 }

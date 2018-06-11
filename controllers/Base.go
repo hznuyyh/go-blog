@@ -56,12 +56,12 @@ func (this *BaseController) RequestData(param interface{}) {
  * @param data map[string]interface{} 返回的数据体
  */
 func (this *BaseController) ReturnData(code int, message string, data interface{}) {
-	this.Data["jsonp"] = map[string]interface{}{
+	this.Data["json"] = map[string]interface{}{
 		"code":    code,
 		"message": message,
 		"data":    data,
 	}
-	this.ServeJSONP()
+	this.ServeJSON()
 	this.StopRun()
 }
 
